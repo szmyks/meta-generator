@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>meta.xml mta generator</title>
+
+	<!-- styles -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/skeleton.css">
+	<link rel="stylesheet" href="css/main.css?ver=1.0">
+
+	<meta name="application-name" content="meta.xml generator">
+	<meta name="theme-color" content="#000">
+	<meta name="description" content="simple meta.xml generator for mta script">
+
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"> 
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<form action="generate.php" method="post">
+				<div class="nine columns">
+					<img src="img/m-g.png" style="width: 90%; margin-top: 30px;" alt="meta.xml mta generator">
+
+
+						<h5 class="divide-header">informacje</h5>
+						<hr>
+
+						<div class="row">
+							<div class="four columns">
+								<label data-remove="true"  for="author">autor <i data-tippy="autor tego zasobu">i</i></label>
+								<input required="" id="author" name="author" type="text" class="u-full-width">
+							</div>
+							<div class="four columns">
+								<label data-remove="true"  for="email">email <i data-tippy="adres e-mail autora">i</i></label>
+								<input type="email" name="email" class="u-full-width" id="email">
+							</div>
+							<div class="four columns">
+								<label data-remove="true"  for="version">wersja <i data-tippy="wersja tego zasobu">i</i></label>
+								<input id="version" name="version" type="text" class="u-full-width">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<label data-remove="true"  for="name">nazwa <i data-tippy="nazwa tego zasobu">i</i></label>
+								<input id="name" name="name" type="text" class="u-full-width">
+							</div>
+							<div class="six columns">
+								<label data-remove="true"  for="description">opis <i data-tippy="opis tego zasobu">i</i></label>
+								<input id="description" name="description" type="text" class="u-full-width">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<label data-remove="true"  for="type">typ <i data-tippy="typ tego zasobu, które mogą być w postaci 'gamemode', 'script', 'map' i 'misc'">i</i></label>
+								<select id="type" name="type" class="u-full-width">
+									<option value=""></option>
+									<option value="gamemode">gamemode</option>
+									<option value="script">script</option>
+									<option value="map">map</option>
+									<option value="misc">misc</option>
+								</select>
+							</div>
+							<div class="six columns">
+								<label data-remove="true"  for="gamemodes">tryby gry <i data-tippy="tryby gry oddzielone przecinkiem">i</i></label>
+								<input id="gamemodes" name="gamemodes" type="text" class="u-full-width">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<h5 class="divide-header">skrypty <i data-tippy="kod źródłowy tego zasobu">i</i></h5>
+							</div>
+							<div class="six columns text-right">
+								<button style="margin-top: 35px;" type="button" data-container="scripts-container" class="addInlineElement">dodaj</button>
+							</div>
+						</div>
+						<hr>
+						
+						<div id="scripts-container">
+							<div class="row">
+								<div class="three columns">
+									<label data-remove="true" >nazwa pliku <i data-tippy="nazwa pliku z kodem źródłowym">i</i></label>
+									<input type="text" class="u-full-width" name="scripts[0][name]">
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >typ <i data-tippy="typ kodu źródłowego, czyli po jakiej stronie ma być wykonywany">i</i></label>
+									<select name="scripts[0][type]" class="u-full-width">
+										<option value=""></option>
+										<option value="client">client</option>
+										<option value="sever">sever</option>
+										<option value="shared">shared</option>
+									</select>
+								</div>
+								<div class="two columns">
+									<label data-remove="true" >pamięć <i data-tippy="true - plik będzie zapisywany w pamięci, false - nie">i</i></label>
+									<select name="scripts[0][cache]" class="u-full-width">
+										<option value=""></option>
+										<option value="true">true</option>
+										<option value="false">false</option>
+									</select>
+								</div>
+								<div class="two columns">
+									<label data-remove="true" >walidacja <i data-tippy="jeżeli ustawiony na false - kompatybilność nie będzie sprawdzana">i</i></label>
+									<select name="scripts[0][validate]" class="u-full-width">
+										<option value=""></option>
+										<option value="true">true</option>
+										<option value="false">false</option>
+									</select>
+								</div>
+								<div class="two columns">
+									<label data-remove="true" >akcje</label>
+									<button type="button" class="u-full-width" onclick="dRow(this);">usuń</button>
+								</div>
+							</div>
+						</div>
+
+						<h5 class="divide-header">mapa <i data-tippy="mapa dla gamemode">i</i></h5>
+						<hr>
+
+						<div class="row">
+							<div class="six columns">
+								<label data-remove="true" >nazwa pliku <i data-tippy="nazwa pliku .map, może też być ścieżką">i</i></label>
+								<input type="text" name="mapFileName" class="u-full-width">
+							</div>
+							<div class="six columns">
+								<label data-remove="true" >wymiar <i data-tippy="wymiar, w którym mapa ma się ładować">i</i></label>
+								<input type="text" name="mapDimension" class="u-full-width">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<h5 class="divide-header">pliki <i data-tippy="pliki po stronie klienta, generalnie to obrazki, pliki .txd, .col, .dff, .xml">i</i></h5>
+							</div>
+							<div class="six columns text-right">
+								<button style="margin-top: 35px;" type="button" data-container="files-container" class="addInlineElement">dodaj</button>
+							</div>
+						</div>
+						<hr>
+						
+						<div id="files-container">
+							<div class="row">
+								<div class="five columns">
+									<label data-remove="true" >nazwa pliku <i data-tippy="nazwa pliku po stronie klienta, może też być ścieżka">i</i></label>
+									<input type="text" class="u-full-width" name="files[][name]">
+								</div>
+								<div class="five columns">
+									<label data-remove="true" >pobieranie <i data-tippy="czy plik ma być wysyłany do klienta automatycznie, jeżeli nie to może zostać wysłany później przez downloadFile">i</i></label>
+									<select name="files[][download]" class="u-full-width">
+										<option value=""></option>
+										<option value="true">true</option>
+										<option value="false">false</option>
+									</select>
+								</div>
+								<div class="two columns">
+									<label data-remove="true" >akcje</label>
+									<button type="button" class="u-full-width" onclick="dRow(this);">usuń</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<h5 class="divide-header">dołączone zasoby <i data-tippy="dołączone zasoby, które mogą być używane przez ten zasób">i</i></h5>
+							</div>
+							<div class="six columns text-right">
+								<button style="margin-top: 35px;" type="button" data-container="includes-container" class="addInlineElement">dodaj</button>
+							</div>
+						</div>
+						<hr>
+						
+						<div id="includes-container">
+							<div class="row">
+								<div class="three columns">
+									<label data-remove="true" >nazwa zasobu <i data-tippy="nazwa zasobu, który uruchomi się razem z tym">i</i></label>
+									<input type="text" class="u-full-width" name="include[][resource]">
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >wersja min. <i data-tippy="minimalna wersja tego zasobu">i</i></label>
+									<input type="text" class="u-full-width" name="include[][minversion]">
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >wersja max. <i data-tippy="maksymalna wersja tego zasobu">i</i></label>
+									<input type="text" class="u-full-width" name="include[][maxversion]">
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >akcje</label>
+									<button type="button" class="u-full-width" onclick="dRow(this);">usuń</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<h5 class="divide-header">pliki konfiguracyjne <i data-tippy="pliki konfiguracyjne (.xml), które są dostępne dla tego zasobu">i</i></h5>
+							</div>
+							<div class="six columns text-right">
+								<button style="margin-top: 35px;" type="button" data-container="configs-container" class="addInlineElement">dodaj</button>
+							</div>
+						</div>
+						<hr>
+						
+						<div id="configs-container">
+							<div class="row">
+								<div class="five columns">
+									<label data-remove="true" >nazwa <i data-tippy="nazwa pliku konfiguracyjnego">i</i></label>
+									<input type="text" class="u-full-width" name="config[][name]">
+								</div>
+								<div class="five columns">
+									<label data-remove="true" >typ <i data-tippy="typ pliku: klient lub serwer">i</i></label>
+									<select class="u-full-width" name="config[][type]">
+										<option value=""></option>
+										<option value="client">client</option>
+										<option value="server">server</option>
+									</select>
+								</div>
+								<div class="two columns">
+									<label data-remove="true" >akcje</label>
+									<button type="button" class="u-full-width" onclick="dRow(this);">usuń</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<h5 class="divide-header">funkcje do eksportu <i data-tippy="funkcje, które ten zasób udostępnia dla innych zasobów">i</i></h5>
+							</div>
+							<div class="six columns text-right">
+								<button style="margin-top: 35px;" type="button" data-container="exports-container" class="addInlineElement">dodaj</button>
+							</div>
+						</div>
+						<hr>
+						
+						<div id="exports-container">
+							<div class="row">
+								<div class="three columns">
+									<label data-remove="true" >nazwa funkcji <i data-tippy="nazwa funkcji z tego zasobu">i</i></label>
+									<input type="text" class="u-full-width" name="export[][name]">
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >typ <i data-tippy="czy funkcja jest eksportowana jako server-side, czy client-side">i</i></label>
+									<select class="u-full-width" name="export[][type]">
+										<option value=""></option>
+										<option value="client">client</option>
+										<option value="server">server</option>
+										<option value="shared">shared</option>
+									</select>
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >http <i data-tippy="czy funkcja może być wywoływana przez http">i</i></label>
+									<select class="u-full-width" name="export[][http]">
+										<option value=""></option>
+										<option value="true">true</option>
+										<option value="false">false</option>
+									</select>
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >akcje</label>
+									<button type="button" class="u-full-width" onclick="dRow(this);">usuń</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<h5 class="divide-header">html</h5>
+							</div>
+							<div class="six columns text-right">
+								<button style="margin-top: 35px;" type="button" data-container="htmls-container" class="addInlineElement">dodaj</button>
+							</div>
+						</div>
+						<hr>
+						
+						<div id="htmls-container">
+							<div class="row">
+								<div class="three columns">
+									<label data-remove="true" >nazwa pliku <i data-tippy="nazwa pliku do dostępu przez HTTP, może być ścieżką">i</i></label>
+									<input type="text" class="u-full-width" name="html[][name]">
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >domyślny <i data-tippy="czy plik ma być jako domyślny wyświetlany po wejściu na stronę zasobu /nazwaZasobu/ na serwerze. tylko jeden może być domyślny, reszta jest ignorowana">i</i></label>
+									<select class="u-full-width" name="html[][default]">
+										<option value=""></option>
+										<option value="true">true</option>
+										<option value="false">false</option>
+									</select>
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >surowy <i data-tippy="czy plik nie ma być parsowany przez Lua i traktowany jak dane binarne. szczególne zastosowanie to obrazki">i</i></label>
+									<select class="u-full-width" name="html[][raw]">
+										<option value=""></option>
+										<option value="true">true</option>
+										<option value="false">false</option>
+									</select>
+								</div>
+								<div class="three columns">
+									<label data-remove="true" >akcje</label>
+									<button type="button" class="u-full-width" onclick="dRow(this);">usuń</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<h5 class="divide-header">ustawienia <i data-tippy="ustawienia dla zasobu">i</i></h5>
+							</div>
+							<div class="six columns text-right">
+								<button style="margin-top: 35px;" type="button" data-container="settings-container" class="addInlineElement">dodaj</button>
+							</div>
+						</div>
+						<hr>
+						
+						<div id="settings-container">
+							<div class="row">
+								<div class="five columns">
+									<label data-remove="true" >nazwa <i data-tippy="nazwa ustawienia">i</i></label>
+									<input type="text" class="u-full-width" name="settings[][name]">
+								</div>
+								<div class="five columns">
+									<label data-remove="true" >wartość <i data-tippy="wartość ustawienia">i</i></label>
+									<input type="text" class="u-full-width" name="settings[][value]">
+								</div>
+								<div class="two columns">
+									<label data-remove="true" >akcje</label>
+									<button type="button" class="u-full-width" onclick="dRow(this);">usuń</button>
+								</div>
+							</div>
+						</div>
+
+						<h5 class="divide-header">minimalna wersja mta <i data-tippy="minimalna wersja mta potrzebna do tego, aby zasób działał prawidłowo">i</i></h5>
+						<hr>
+
+						<div class="row">
+							<div class="six columns">
+								<label data-remove="true" >klient <i data-tippy="minimalna wersja klienta gry">i</i></label>
+								<input type="text" class="u-full-width" name="minMtaVersionClient">
+							</div>
+							<div class="six columns">
+								<label data-remove="true" >sewer <i data-tippy="minimalna wersja serwera">i</i></label>
+								<input type="text" class="u-full-width" name="minMtaVersionServer">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="six columns">
+								<h5 class="divide-header">prawa ACL <i data-tippy="prawa ACL, których ten zasób wymaga do działania">i</i></h5>
+							</div>
+							<div class="six columns text-right">
+								<button style="margin-top: 35px;" type="button" data-container="acl-rights-container" class="addInlineElement">dodaj</button>
+							</div>
+						</div>
+						<hr>
+						
+						<div id="acl-rights-container">
+							<div class="row">
+								<div class="five columns">
+									<label data-remove="true" >nazwa <i data-tippy="nazwa prawa">i</i></label>
+									<input type="text" class="u-full-width" name="aclRights[][name]">
+								</div>
+								<div class="five columns">
+									<label data-remove="true" >dostęp <i data-tippy="dostęp">i</i></label>
+									<select type="text" class="u-full-width" name="aclRights[][access]">
+										<option value=""></option>
+										<option value="true">true</option>
+										<option value="false">false</option>
+									</select>
+								</div>
+								<div class="two columns">
+									<label data-remove="true" >akcje</label>
+									<button type="button" class="u-full-width" onclick="dRow(this);">usuń</button>
+								</div>
+							</div>
+						</div>
+
+						<h5 class="divide-header">synchronizacja danych elementów map <i data-tippy="kontrola, czy dane takie jak PosX lub DoubleSided są transferowane do klienta">i</i></h5>
+						<hr>
+
+						<div class="row">
+							<div class="twelve columns">
+								<label data-remove="true" >wybierz</label>
+								<select class="u-full-width" name="syncMapElementData">
+									<option value=""></option>
+									<option value="true">true</option>
+									<option value="false">false</option>
+								</select>
+							</div>
+						</div>
+
+						<h5 class="divide-header">OOP <i data-tippy="obiektowość zasobu">i</i></h5>
+						<hr>
+
+						<div class="row">
+							<div class="twelve columns">
+								<label data-remove="true" >wybierz</label>
+								<select class="u-full-width" name="oop">
+									<option value=""></option>
+									<option value="true">true</option>
+									<option value="false">false</option>
+								</select>
+							</div>
+						</div>
+
+						<h5 class="divide-header">priorytet pobierania <i data-tippy="jeżeli nie ustawiony to priorytet pobierania jest na 0. im więcej powyżej 0, tym wcześniej zasób będzie pobierany. im więcej poniżej 0 tym zasób będzie później pobierany">i</i></h5>
+						<hr>
+
+						<div class="row">
+							<div class="twelve columns">
+								<label data-remove="true" >wpisz</label>
+								<input type="text" class="u-full-width" name="downloadPriorityGroup">
+							</div>
+						</div>
+
+						<h5 class="divide-header">generuj pliki &copy codecup.pl</h5>
+						<hr>
+
+					<p>
+						<a href="http://codecup.pl" target="_blank">codecup.pl</a> &copy <script>document.write(new Date().getFullYear())</script>
+					</p>
+				</div>
+				<div class="three columns">
+					<div class="text-center" style="margin-top: 50px; position: fixed; bottom: 15px;">
+						<button type="submit">generuj</button>
+						<hr style="width: 20%;">
+						<img src="http://www.codecup.pl/img/codecup-white.png" style="width: 15%;" alt="codecup logo">
+
+						<p style="margin-top: 20px; text-decoration: underline;">
+							<a href="http://codecup.pl">CC Software</a>
+						</p>
+
+						<p>
+							<a href="http://codecup.pl" target="_blank">codecup.pl</a> &copy <script>document.write(new Date().getFullYear())</script>
+						</p>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="https://unpkg.com/feather-icons"></script>
+	<script src="https://unpkg.com/tippy.js@3/dist/tippy.all.min.js"></script>
+	<script src="js/add.js"></script>
+	<script src="js/remove.js"></script>
+	<script>
+		feather.replace();
+	</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+body, html {
+	background: #000;
+	font-family: 'Roboto Mono', monospace;
+	color: #fff;
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select,
+select:focus {
+    background: none;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 0;
+}
+
+option {
+	color: #000;
+}
+
+button {
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 0;
+    text-transform: lowercase;
+}
+
+a, a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.divide-header {
+	margin-top: 35px;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.code-snippet {
+	padding: 15px;
+	color: #fff;
+	border: 1px solid #fff;
+	border-radius: 0;
+}
